@@ -49,7 +49,7 @@ npm install
 serverless offline start --migrate
 ```
 
-### Commands for a fresh new project:
+### Commands for running a fresh new project local:
 
 ```
 serverless --help
@@ -64,11 +64,16 @@ serverless plugin install --name serverless-offline
 ```
 serverless plugin install --name serverless-dynamodb-local
 serverless dynamodb install
-serverless dynamodb start --migrate
 ```
 
 ```
-npm install
+npm init --yes
+npm install -save aws-sdk
+npm install --save aws-lambda-multipart-parser
+```
+
+```
+serverless offline start --migrate
 ```
 
 ### Commands to deploy:
