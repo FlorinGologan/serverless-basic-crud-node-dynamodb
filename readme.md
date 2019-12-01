@@ -81,3 +81,21 @@ serverless offline start --migrate
 ```
 serverless deploy --stage test --aws-profile personal
 ```
+
+### Links
+https://github.com/madedotcom/wishlist
+
+https://aws.amazon.com/lambda/
+
+https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/
+https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB.html
+
+https://serverless.com/
+https://serverless.com/plugins/serverless-offline/
+https://serverless.com/dynamodb/
+https://serverless.com/plugins/serverless-dynamodb-local/
+
+https://github.com/serverless/plugins
+
+https://www.npmjs.com/package/aws-sdk
+https://www.npmjs.com/package/aws-lambda-multipart-parser

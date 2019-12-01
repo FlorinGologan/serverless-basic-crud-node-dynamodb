@@ -1,4 +1,4 @@
-service: made-teams
+service: users-crud
 
 provider:
   name: aws
