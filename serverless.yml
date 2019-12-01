@@ -31,17 +31,35 @@ custom:
           - table: ${self:provider.environment.DYNAMODB_TABLE}
 
 functions:
-  createUser:
-    handler: handler.createUser
+  postUser:
+    handler: handler.postUser
     events:
       - http:
-          path: users/create
+          path: v1/users
           method: post
-  listUsers:
-    handler: handler.listUsers
+  putUser:
+    handler: handler.putUser
     events:
       - http:
-          path: users/list
+          path: v1/users/{code}
+          method: put
+  deleteUser:
+    handler: handler.deleteUser
+    events:
+      - http:
+          path: v1/users/{code}
+          method: delete
+  getUser:
+    handler: handler.getUser
+    events:
+      - http:
+          path: v1/users/{code}
+          method: get
+  getUsers:
+    handler: handler.getUsers
+    events:
+      - http:
+          path: v1/users
           method: get
 
 resources:
@@ -53,12 +71,8 @@ resources:
         KeySchema:
           - AttributeName: code
             KeyType: HASH
-          - AttributeName: name
-            KeyType: RANGE
         AttributeDefinitions:
           - AttributeName: code
-            AttributeType: S
-          - AttributeName: name
             AttributeType: S
         BillingMode: PAY_PER_REQUEST
 
