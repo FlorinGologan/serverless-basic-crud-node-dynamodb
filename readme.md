@@ -2,6 +2,8 @@
 
 Basic CRUD implementation with: Node, DynamoDB, Serverless (local and ready for deploy)
 
+*** This is not something ready for production. HAS NO VALIDATION!!! 
+
 ## Prerequisite
 
 ```
@@ -37,16 +39,9 @@ aws sts get-caller-identity --profile=personal
 ### Commands to run project locally:
 
 ```
-npm install -g serverless
+make install
 
-serverless plugin install --name serverless-offline
-
-serverless dynamodb install
-serverless plugin install --name serverless-dynamodb-local
-
-npm install
-
-serverless offline start --migrate
+make run
 ```
 
 ### Commands for running a fresh new project local:
@@ -69,7 +64,6 @@ serverless dynamodb install
 ```
 npm init --yes
 npm install -save aws-sdk
-npm install --save aws-lambda-multipart-parser
 ```
 
 ```
@@ -98,4 +92,3 @@ https://serverless.com/plugins/serverless-dynamodb-local/
 https://github.com/serverless/plugins
 
 https://www.npmjs.com/package/aws-sdk
-https://www.npmjs.com/package/aws-lambda-multipart-parser

@@ -1,9 +1,15 @@
-service: users-crud
+service:
+  name: serverless-basic-crud-node-dynamodb
+  tag:
+    env: ${opt:stage, self:provider.stage}
+    name: ${self:service.name}-${self:service.tag.env}
 
 provider:
+  stackName: ${self:service.tag.name}
+  apiName: ${self:service.tag.name}
   name: aws
   runtime: nodejs10.x
-  stage: dev
+  stage: ${opt:stage, 'local'}
   region: eu-west-1
   memorySize: 128
   timeout: 3
@@ -15,7 +21,7 @@ provider:
       Resource: "*"
 
   environment:
-    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    DYNAMODB_TABLE: ${self:service.tag.name}
 
 custom:
   dynamodb:

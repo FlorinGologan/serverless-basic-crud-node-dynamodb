@@ -1,23 +1,22 @@
-"use strict";
+'use strict';
 
-const AWS = require("aws-sdk");
-const multipart = require("aws-lambda-multipart-parser");
+const AWS = require('aws-sdk');
 
 let options = {};
 if (process.env.IS_OFFLINE) {
   options = {
-    region: "eu-west-1",
-    endpoint: "http://localhost:8000"
+    region: 'eu-west-1',
+    endpoint: 'http://localhost:8000'
   };
 }
 
 const dynamodb = new AWS.DynamoDB.DocumentClient(options);
 
 module.exports.postUser = async event => {
-  const body = multipart.parse(event);
+  const item = event.body ? JSON.parse(event.body) : {};
   const params = {
     TableName: process.env.DYNAMODB_TABLE,
-    Item: body
+    Item: item
   };
 
   try {
@@ -33,11 +32,11 @@ module.exports.postUser = async event => {
 };
 
 module.exports.putUser = async event => {
-  const { code = "" } = event.pathParameters;
-  const body = multipart.parse(event);
+  const {code = ''} = event.pathParameters;
+  const item = event.body ? JSON.parse(event.body) : {};
   const params = {
     TableName: process.env.DYNAMODB_TABLE,
-    Item: { ...body, code }
+    Item: {...item, code}
   };
 
   try {
@@ -53,7 +52,7 @@ module.exports.putUser = async event => {
 };
 
 module.exports.deleteUser = async event => {
-  const { code = "" } = event.pathParameters;
+  const {code = ''} = event.pathParameters;
   const params = {
     TableName: process.env.DYNAMODB_TABLE,
     Key: {
@@ -74,12 +73,12 @@ module.exports.deleteUser = async event => {
 };
 
 module.exports.getUser = async event => {
-  const { code = "" } = event.pathParameters;
+  const {code = ''} = event.pathParameters;
   const params = {
     TableName: process.env.DYNAMODB_TABLE,
-    KeyConditionExpression: "code = :s",
+    KeyConditionExpression: 'code = :s',
     ExpressionAttributeValues: {
-      ":s": code
+      ':s': code
     }
   };
 
